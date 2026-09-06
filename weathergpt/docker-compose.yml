@@ -1,0 +1,48 @@
+version: "3.9"
+
+# WeatherGPT - fully free stack: FastAPI + Open-Meteo (no API keys), SQLite or
+# optional PostgreSQL, optional local LLM (Ollama) for enhanced answers.
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      # Storage: SQLite (default) or PostgreSQL, e.g.:
+      # DATABASE_URL: postgresql+psycopg://weathergpt:weathergpt@db:5432/weathergpt
+      DATABASE_URL: "sqlite:////data/weathergpt.db"
+      ALERT_POLL_SECONDS: "600"
+      # Optional free local LLM (start `docker compose up llm` too and uncomment):
+      # LLM_BACKEND: "ollama"
+      # LLM_URL: "http://llm:11434/api/chat"
+      # LLM_MODEL: "llama3.2"
+    volumes:
+      - weathergpt_data:/data
+    restart: unless-stopped
+
+  # Optional: PostgreSQL instead of SQLite (set DATABASE_URL above)
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: weathergpt
+      POSTGRES_PASSWORD: weathergpt
+      POSTGRES_DB: weathergpt
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    profiles: ["postgres"]
+    restart: unless-stopped
+
+  # Optional: fully free, local, offline LLM (Ollama) for answer polishing
+  llm:
+    image: ollama/ollama:latest
+    profiles: ["llm"]
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  weathergpt_data:
+  pg_data:
+  ollama_data:

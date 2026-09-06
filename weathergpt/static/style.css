@@ -1,0 +1,213 @@
+/* ============================================================
+   WeatherGPT — Premium Figma-Accurate Theme
+   ============================================================ */
+:root {
+  --bg-dark: #121020;
+  --card-glass: rgba(255, 255, 255, 0.12);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --text-main: #ffffff;
+  --text-dim: rgba(255, 255, 255, 0.75);
+  --text-dark: #2d3748;
+  --pill-bg: #ffffff;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  --font-main: 'Outfit', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --accent: #5fd4c8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; font-family: var(--font-main); color: var(--text-main); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+.app-background {
+  position: fixed; inset: 0; z-index: -1;
+  background: url('https://images.unsplash.com/photo-1500740516770-92bd004b996e?auto=format&fit=crop&w=2560&q=80') center center / cover no-repeat;
+}
+.app-background::after {
+  content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(30, 20, 50, 0.3), rgba(30, 20, 50, 0.6));
+}
+
+button, select, input, textarea { font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+.hidden { display: none !important; }
+
+#app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; display: flex; flex-direction: column; gap: 40px; }
+
+/* HEADER */
+.topbar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: 20px; z-index: 100; }
+
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 1.2rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+.nav-pill { display: flex; gap: 16px; background: var(--pill-bg); padding: 8px 16px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); color: var(--text-dark); font-size: 14px; font-weight: 500; }
+.nav-pill a { padding: 4px 12px; border-radius: 999px; transition: 0.2s; }
+.nav-pill a:hover, .nav-pill a.active { color: #5fd4c8; }
+
+.topbar-controls { display: flex; gap: 8px; align-items: center; }
+.pillsel { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 999px; padding: 6px 12px; backdrop-filter: blur(10px); outline: none; font-size: 13px; font-weight: 500; cursor: pointer; }
+.pillsel option { background: var(--bg-dark); color: white; }
+
+/* HERO */
+.hero-section { text-align: center; margin-top: 40px; }
+.hero-title { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.hero-subtitle { font-size: 1rem; color: var(--text-dim); max-width: 600px; margin: 0 auto 32px; font-weight: 400; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+
+.chat-input-wrapper { display: flex; align-items: center; background: white; border-radius: 999px; max-width: 540px; margin: 0 auto 16px; padding: 6px 6px 6px 24px; box-shadow: 0 12px 30px rgba(0,0,0,0.15); transition: 0.3s; }
+.chat-input-wrapper:focus-within { box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 3px rgba(255,255,255,0.3); }
+#heroInput { flex: 1; border: none; outline: none; font-size: 1.05rem; color: var(--text-dark); background: transparent; font-weight: 400; }
+#heroInput::placeholder { color: #8e9db0; }
+.send-btn { border: none; background: transparent; color: var(--text-dark); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; opacity: 0.6; }
+.send-btn:hover { opacity: 1; background: #f0f4f8; }
+.mic-btn { border: none; background: transparent; color: var(--text-dark); font-size: 18px; cursor: pointer; padding: 10px; }
+
+.location-display { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 1rem; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+.loc-text { font-size: 1.1rem; }
+.change-loc-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 16px; border-radius: 999px; cursor: pointer; transition: 0.2s; backdrop-filter: blur(10px); font-weight: 500; font-size: 0.9rem; }
+.change-loc-btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+
+/* GLASS CARD */
+.glass { background: var(--card-glass); border: 1px solid var(--card-border); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: var(--shadow); border-radius: var(--radius); }
+
+.section-heading { font-size: 1.4rem; font-weight: 600; margin-bottom: 20px; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+/* FORECAST */
+.forecast-scroll { display: flex; gap: 12px; padding: 10px 4px; justify-content: space-between; align-items: stretch; }
+@media (max-width: 768px) { .forecast-scroll { overflow-x: auto; justify-content: flex-start; scrollbar-width: none; } }
+.forecast-scroll::-webkit-scrollbar { display: none; }
+.fc-day { flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px 12px; min-width: 80px; text-align: center; backdrop-filter: blur(10px); display: flex; flex-direction: column; gap: 8px; transition: transform 0.2s; }
+.fc-day:first-child { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); } /* "Today" emphasized */
+.fc-day:hover { transform: translateY(-3px); }
+.fc-day .d { font-size: 1rem; font-weight: 500; }
+.fc-day .hi { font-size: 1.8rem; font-weight: 700; letter-spacing: -1px; margin: 4px 0; }
+.fc-day .ic { font-size: 24px; }
+.fc-day .lo { display: none; } /* Hide lows in the compact view */
+
+/* CURRENT CONDITIONS */
+.current-card-new { display: flex; padding: 24px; gap: 24px; justify-content: space-between; align-items: stretch; min-height: 240px; }
+.cur-content { display: flex; flex-direction: column; justify-content: space-between; flex: 1; }
+.cur-header { font-size: 0.8rem; letter-spacing: 1px; font-weight: 600; text-transform: uppercase; margin-bottom: 4px; }
+.cur-loc-name { font-size: 1.6rem; font-weight: 500; margin-bottom: 24px; }
+.cur-main-info { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; }
+.cur-temp { font-size: 5rem; font-weight: 700; letter-spacing: -3px; line-height: 1; }
+.cur-desc-group { display: flex; flex-direction: column; }
+.cur-desc { font-size: 1.4rem; font-weight: 500; }
+.cur-extra { font-size: 0.9rem; color: var(--text-dim); background: rgba(124, 232, 180, 0.2); color: #7ce8b4; padding: 4px 12px; border-radius: 999px; margin-top: 8px; display: inline-block; font-weight: 500; }
+.cur-metrics-new { display: flex; gap: 12px; flex-wrap: wrap; }
+.metric-chip { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; display: flex; gap: 8px; align-items: center; }
+.metric-chip .lbl { color: var(--text-dim); font-size: 0.85rem; }
+
+.cur-image-box { flex: 0 0 240px; border-radius: var(--radius-sm); background: url('https://images.unsplash.com/photo-1534088568595-a066f410cbda?auto=format&fit=crop&w=600&q=80') center/cover; position: relative; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); }
+.cur-image-time { position: absolute; bottom: 12px; right: 12px; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-size: 1.1rem; }
+
+/* HOURLY */
+.hourly-card-new { padding: 24px; }
+.chart-wrap { height: 200px; width: 100%; position: relative; }
+
+/* RISK MAP */
+.risk-map-layout { display: grid; grid-template-columns: 1fr 280px; gap: 24px; }
+.map-card-new { padding: 8px; position: relative; display: flex; flex-direction: column; }
+.map-wrapper { flex: 1; min-height: 400px; position: relative; border-radius: 12px; overflow: hidden; }
+.map { position: absolute; inset: 0; }
+.map-tools { position: absolute; top: 12px; right: 12px; display: flex; flex-direction: column; gap: 8px; z-index: 5; }
+.rbtn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; padding: 8px 12px; font-size: 12px; cursor: pointer; backdrop-filter: blur(4px); }
+.rbtn:hover { background: rgba(0,0,0,0.7); }
+
+.layer-tabs { display: flex; gap: 8px; position: absolute; top: 20px; left: 20px; z-index: 5; }
+.ltab { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 500; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; }
+.ltab.on { background: white; color: var(--text-dark); }
+.span-row { display: none; } /* Hide for cleaner ui unless interacting */
+.map-legend { position: absolute; bottom: 20px; left: 20px; z-index: 5; font-size: 11px; background: rgba(0,0,0,0.6); padding: 6px 12px; border-radius: 8px; backdrop-filter: blur(4px); }
+
+.risk-legend-card { padding: 24px; display: flex; flex-direction: column; justify-content: center; }
+.risk-item-new { display: flex; align-items: center; gap: 12px; font-size: 1.2rem; font-weight: 500; margin-bottom: 20px; }
+.risk-item-new:last-child { margin-bottom: 0; }
+.dot { width: 14px; height: 14px; border-radius: 50%; box-shadow: 0 0 10px currentColor; }
+.dot.green { background: #7ce8b4; color: #7ce8b4; }
+.dot.yellow { background: #ffcf6e; color: #ffcf6e; }
+.dot.orange { background: #ff9d6b; color: #ff9d6b; }
+.dot.red { background: #ff8f8f; color: #ff8f8f; }
+
+/* MISC */
+.radar-player { position: absolute; bottom: 20px; right: 20px; z-index: 5; display: flex; gap: 8px; align-items: center; background: rgba(0,0,0,0.6); padding: 8px 12px; border-radius: 8px; backdrop-filter: blur(4px); }
+#radarSlider { width: 120px; }
+
+.search-wrap { position: absolute; top: 60px; right: 0; background: white; padding: 8px; border-radius: 12px; display: flex; gap: 8px; box-shadow: var(--shadow); }
+#locSearch { border: 1px solid #ddd; padding: 8px 12px; border-radius: 8px; font-size: 14px; outline: none; }
+.btn-acc { background: var(--text-dark); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
+
+@media (max-width: 900px) {
+  .risk-map-layout { grid-template-columns: 1fr; }
+  .current-card-new { flex-direction: column; }
+  .cur-image-box { height: 200px; flex: none; }
+  .forecast-scroll { justify-content: flex-start; }
+  .nav-pill { display: none; } /* Hide on mobile for now */
+  .hero-title { font-size: 2.5rem; }
+}
+
+/* Ensure the map fills its wrapper (MapLibre can override container position
+   collapsing it to 0 height). Minimal & necessary - no layout change intended. */
+#map { width: 100% !important; height: 100% !important; position: relative !important; }
+
+/* ================= WEATHERGPT FLOATING ASSISTANT ================= */
+.chat-fab{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(135deg,#2f7bff,#7c5cff);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 8px 30px rgba(0,0,0,.35),0 0 0 6px rgba(255,255,255,.06);z-index:200;transition:transform .2s,box-shadow .2s,opacity .2s}
+.chat-fab:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 12px 36px rgba(0,0,0,.45)}
+.chat-fab:active{transform:scale(.97)}
+.chat-fab:focus-visible{outline:2px solid #9db8ff;outline-offset:3px}
+.chat-panel{position:fixed;right:22px;bottom:94px;width:384px;max-width:calc(100vw - 44px);height:min(600px,76vh);z-index:210;
+  display:flex;flex-direction:column;border-radius:20px;overflow:hidden;background:linear-gradient(170deg,rgba(24,32,58,.97),rgba(14,20,38,.98));
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 24px 70px rgba(0,0,0,.5);backdrop-filter:blur(14px);
+  opacity:1;transform:translateY(0) scale(1);transition:opacity .28s ease,transform .3s cubic-bezier(.22,.61,.36,1),visibility 0s linear 0s}
+.chat-panel.closed{opacity:0;transform:translateY(22px) scale(.96);visibility:hidden;pointer-events:none;transition:opacity .24s ease,transform .26s cubic-bezier(.22,.61,.36,1),visibility 0s linear .24s}
+.chat-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03)}
+.chat-title{font-size:15px;color:#fff;display:flex;flex-direction:column;line-height:1.25}
+.chat-sub{font-size:11px;color:#9fb0d8;display:block}
+.chat-close{background:none;border:none;color:#9fb0d8;font-size:16px;cursor:pointer;width:32px;height:32px;border-radius:8px}
+.chat-close:hover{color:#fff;background:rgba(255,255,255,.08)}
+.messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;scrollbar-width:thin}
+.msg{max-width:86%;border-radius:16px;padding:10px 13px;font-size:13.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word;animation:msgIn .3s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.msg.user{align-self:flex-end;background:linear-gradient(135deg,#2f7bff,#7c5cff);color:#fff;border-bottom-right-radius:5px}
+.msg.ai{align-self:flex-start;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.1);border-bottom-left-radius:5px;color:#eaf0ff}
+.msg .meta{font-size:9.5px;color:#8fa2cf;margin-top:6px;display:flex;gap:8px}
+.msg.ai .tsspeak{font-size:10px;color:#9db8ff;margin-left:6px;cursor:pointer}
+.typing{align-self:flex-start;color:#9fb0d8;font-size:12.5px;padding:8px 12px;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.45}}
+.chat-suggests{display:flex;gap:6px;flex-wrap:wrap;padding:4px 14px 8px}
+.suggest{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#cfe0ff;border-radius:999px;padding:6px 11px;font-size:11.5px;cursor:pointer;transition:.2s}
+.suggest:hover{background:rgba(255,255,255,.16);border-color:#7c5cff}
+.composer{display:flex;gap:8px;align-items:flex-end;padding:10px 12px;border-top:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03)}
+#input{flex:1;background:rgba(8,13,27,.5);border:1px solid rgba(255,255,255,.14);border-radius:14px;color:#eaf0ff;padding:11px 13px;font-size:13.5px;resize:none;max-height:96px;font-family:inherit;outline:none}
+#input:focus{border-color:#7c5cff}
+.mic{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(8,13,27,.5);font-size:15px;cursor:pointer;flex:0 0 auto}
+.mic.rec{background:#7a2e2e;border-color:#f87171;animation:pulse 1s infinite}
+.send{width:40px;height:40px;border-radius:50%;border:none;background:linear-gradient(135deg,#2f7bff,#7c5cff);color:#fff;font-size:15px;cursor:pointer;flex:0 0 auto;font-weight:700}
+.send:hover{filter:brightness(1.1)}
+.voice-hints{display:flex;justify-content:space-between;align-items:center;padding:2px 12px 10px;font-size:10.5px;color:#8fa2cf}
+.linkbtn{background:none;border:none;color:#9db8ff;font-size:10.5px;cursor:pointer}
+.ai-badge{position:absolute;top:14px;right:52px;font-size:9.5px;color:#7ce8b4;border:1px solid rgba(124,232,180,.35);border-radius:999px;padding:2px 8px}
+.ai-badge.warn{color:#ffcf6e;border-color:rgba(255,207,110,.4)}
+@media (max-width:560px){
+  .chat-panel{right:12px;left:12px;width:auto;bottom:88px;height:70vh}
+  .chat-fab{right:16px;bottom:16px}
+}
+
+/* ================= HOURLY TIMELINE (primary forecast visual) ================= */
+#hourlyCard { display: flex; flex-direction: column; }
+.hourly-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 6px 4px 12px; scrollbar-width: thin; }
+.hourly-scroll::-webkit-scrollbar { height: 6px; }
+.hourly-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 6px; }
+.hday { flex: 0 0 auto; min-width: 86px; background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm,14px); padding: 12px 10px; text-align: center; backdrop-filter: blur(10px);
+  display: flex; flex-direction: column; gap: 6px; align-items: center; transition: transform .2s; }
+.hday:hover { transform: translateY(-3px); }
+.hday.now { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.34); box-shadow: 0 0 0 2px rgba(255,255,255,0.12) inset; }
+.hday .t { font-size: .86rem; font-weight: 600; color: #cfe0ff; letter-spacing: .2px; }
+.hday.now .t { color: #fff; text-transform: uppercase; }
+.hday .ic { font-size: 26px; line-height: 1; }
+.hday .v { font-size: 1.5rem; font-weight: 700; letter-spacing: -1px; color: #fff; }
+.hday .p { font-size: .8rem; color: #9fb0d8; }
+.hourly-insight { font-size: 13px; color: var(--text-dim, #aeb9d8); line-height: 1.6; padding: 2px 4px 10px; font-weight: 500; }
+.hourly-insight:empty { display: none; }
